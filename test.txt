@@ -1,1 +1,1 @@
-Hello, world. You asked for: a delicious treat
+Hello, world. You get: a delicious treat
