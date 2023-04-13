@@ -1,0 +1,10 @@
+Here are the main branches of science: 
+
+1. Physics
+2. Chemistry
+3. Biology
+4. Earth and Space Science 
+5. Environmental Science
+6. Psychology
+7. Social Sciences (economics, political science, sociology, anthropology)
+8. Health Science
