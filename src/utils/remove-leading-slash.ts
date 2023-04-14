@@ -1,3 +1,1 @@
-export function removeLeadingSlash(path: string): string {
-  return path.replace(/^\//, '');
-}
+export const removeLeadingSlash = (path: string): string => path.replace(/^\//, '');
