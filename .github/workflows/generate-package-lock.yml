@@ -1,0 +1,28 @@
+name: Generate Package-Lock
+
+on:
+  push:
+    branches:
+      - '!main'
+    paths:
+      - 'package.json'
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 16.x
+      - name: Install Package Dependencies
+        run: npm install
+      - name: Commit Package-Lock.json
+        run: |
+          git config user.email 'coco@twin-digital.com'
+          git config user.name 'coco-b0t'
+          if [[ -n $(git status --porcelain package-lock.json) ]]; then
+            git add package-lock.json
+            git commit -m 'Auto-commit: Generate package-lock.json'
+            git push
+          fi
