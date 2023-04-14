@@ -1,0 +1,50 @@
+name: Generate Package-Lock Json
+
+on:
+  push:
+    branches:
+      - '!main'
+    paths:
+      - 'package.json'
+
+jobs:
+  generate-package-lock:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          submodules: 'recursive'
+      - name: Install dependencies
+        uses: actions/setup-node@v2
+      - name: Generate package-lock.json file
+        run: npm ci
+      - name: Commit package-lock.json file
+        uses: actions/github-script@v3
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            const fs = require('fs');
+        
+            fs.stat('package-lock.json', async (err, stats) => {
+              if (!err) {
+                console.log('package-lock.json file found, committing changes.');
+                const content = fs.readFileSync('package-lock.json');
+                const message = 'Generate package-lock.json file.';
+                try {
+                  await context.octokit.repos.createOrUpdateFileContents({
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    path: 'package-lock.json',
+                    message: message,
+                    content: content.toString('base64'),
+                    sha: context.payload.before
+                  });
+                  console.log('package-lock.json file committed successfully.');
+                } catch (error) {
+                  console.error(error);
+                }
+              } else {
+                console.log('package-lock.json file not found, skipping this step.');
+              }
+            });
