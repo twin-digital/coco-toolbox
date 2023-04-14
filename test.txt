@@ -1,31 +1,56 @@
-# Python Basics
+# Codecademy Data Analysis Capstone Projects
 
-This repository contains materials and exercises for learning the basics of Python programming language. It is suitable for beginners and covers topics such as data types, operators, control structures, loops, functions, modules, and more.
+This repository contains the capstone projects completed by me as a part of the Codecademy Data Analysis Path. Each project folder contains the project details, data files, and the Jupyter notebook where the analysis has been performed.
 
-## Getting started
+## Project List
 
-To get started with the materials in this repository, you need to have Python installed on your computer. Check the [official Python website](https://www.python.org/downloads/) for installation instructions.
+1. [US Medical Insurance Costs](/us-medical-insurance-costs)
+2. [YouTube Trending Videos Data Analysis](/youtube-trending-videos-analysis)
+3. [OkCupid Data Analysis](/okcupid-data-analysis)
 
-Once you have Python installed, you can clone this repository to your local machine using the following command:
+## Repository Structure
+
+The repository is structured as follows:
 
 ```
-git clone https://github.com/username/python-basics.git
+codecademy-data-analysis-capstone/
+├── us-medical-insurance-costs/
+│   ├── data/
+│   │   └── insurance.csv
+│   ├── .gitignore
+│   ├── README.md
+│   └── us-medical-insurance-costs.ipynb
+├── youtube-trending-videos-analysis/
+│   ├── data/
+│   │   ├── CAvideos.csv
+│   │   ├── DEvideos.csv
+│   │   ├── FRvideos.csv
+│   │   ├── GBvideos.csv
+│   │   └── USvideos.csv
+│   ├── .gitignore
+│   ├── README.md
+│   └── youtube-trending-videos-analysis.ipynb
+├── okcupid-data-analysis/
+│   ├── data/
+│   │   └── profiles.csv
+│   ├── .gitignore
+│   ├── README.md
+│   └── okcupid-data-analysis.ipynb
+└── README.md
 ```
 
-## Contents
+## Getting Started
 
-This repository contains the following folders and files:
+To run the Jupyter notebooks in this repository, you must have Jupyter Notebook installed on your system. You can download and install Jupyter Notebook from [here](https://jupyter.org/install).
 
-- `README.md`: This file you are currently reading.
-- `data/`: A folder containing datasets used in exercises and examples.
-- `exercises/`: A folder containing Python files with exercises for each topic covered in the course.
-- `examples/`: A folder containing Python files with illustrative examples for each topic covered in the course.
-- `modules/`: A folder containing Python files with module examples for each topic covered in the course.
+You can download the project files by running the following command in your terminal:
 
-## Contributing
+```shell
+git clone https://github.com/USERNAME/codecademy-data-analysis-capstone.git
+```
 
-We welcome contributions to this repository. If you find errors in the materials, have suggestions for improvements, or want to add new exercises or examples, feel free to open a pull request or create an issue.
+Replace `USERNAME` with your GitHub username.
 
 ## License
 
-This repository is licensed under the MIT License. See the `LICENSE` file for more information.
+The content of this repository is licensed under a [Creative Commons Attribution License](https://creativecommons.org/licenses/by/3.0/us/).
