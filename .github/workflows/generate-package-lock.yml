@@ -1,32 +1,62 @@
-name: Generate package-lock.json
+name: generate-package-lock
 
 on:
   push:
     branches:
-      - '!main'
+      - "!main"
     paths:
-      - '**/package.json'
+      - "package.json"
 
 jobs:
-  install-dependencies:
+  generate-package-lock:
     runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
 
-      - name: Install dependencies
-        uses: actions/setup-node@v2
-        with:
-          node-version: 14.x
-          cache: 'npm'
-        run: |
-          npm install
-          
-      - name: Create Pull Request if changes
-        run: |
-          git config --global user.email 'github-action@test.com'
-          git config --global user.name 'GitHub Action'
-          git checkout ${{ github.head_ref }}
-          git add ./package-lock.json
-          git commit -m 'chore: Update package-lock.json'
-          git push origin ${{ github.head_ref }}
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v2
+      with:
+        node-version: '16.x'
+        registry-url: 'https://registry.npmjs.org/'
+
+    - name: Install Dependencies
+      run: |
+        git config --global user.email "coco@twin-digital.com"
+        git config --global user.name "coco-b0t"
+        npm install
+
+    - name: Commit package-lock.json
+      uses: actions/github-script@v4
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        script: |
+          const fs = require('fs');
+          const execSync = require('child_process').execSync;
+          if (!fs.existsSync('./package-lock.json')) {
+            console.log('package-lock.json not found. Generating file...');
+            execSync('npm install');
+            execSync('git add package-lock.json');
+            execSync('git commit -m "Add package-lock.json"');
+          } else {
+            console.log('package-lock.json exists. Checking for updates...');
+            const outdatedCommand = 'npm outdated --json --depth=999';
+            const outdatedPackages = JSON.parse(execSync(outdatedCommand).toString());
+            let packageUpdateFlag = false;
+            for (const packageName in outdatedPackages) {
+              if (outdatedPackages.hasOwnProperty(packageName)) {
+                const packageVersion = outdatedPackages[packageName].latest;
+                execSync(`npm install ${packageName}@${packageVersion}`);
+                execSync('git add package-lock.json');
+                packageUpdateFlag = true;
+              }
+            }
+
+            if (!packageUpdateFlag) {
+              console.log('package-lock.json up-to-date...skipping commit.');
+            } else {
+              console.log('package-lock.json updated.');
+              execSync(`git commit -m "Update package-lock.json"`);
+            }
+          }
