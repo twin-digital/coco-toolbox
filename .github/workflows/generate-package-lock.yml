@@ -1,57 +1,37 @@
-name: Generate Package-Lock
-
+name: Generate package-lock.json on push to branches except main
 on:
   push:
     branches:
       - '!main'
     paths:
       - 'package.json'
-
 jobs:
   generate-package-lock:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout code
+      - name: Checkout repo
         uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v2.5.1
         with:
-          node-version: 16.x
-
+          node-version: '16.x'
+      - name: Cache npm dependencies
+        uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}-npm-${{ hashFiles('**/npm-shrinkwrap.json') }}-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: ${{ runner.os }}-node-
       - name: Install Dependencies
         run: npm install
 
-      - name: Configure Git
-        run: |
-          git config user.email 'coco@twin-digital.com'
-          git config user.name 'coco-b0t'
-        shell: bash
-
-      - name: Stage changes
-        run: |
-          git add package-lock.json
-        shell: bash
-
-      - name: Check for changes
-        id: check_changes
-        run: |
-          git diff --exit-code
-          echo ::set-output name=changes::no
-        shell: bash
-
       - name: Commit changes
-        if: steps.check_changes.outputs.changes == 'no'
         run: |
-          git commit -m 'regenerate package-lock.json'
-        shell: bash 
-
+          git config --global user.email 'coco@twin-digital.com'
+          git config --global user.name 'coco-b0t'
+          git add package-lock.json
+          git commit -m 'Generate package-lock.json'
       - name: Push changes
-        if: steps.check_changes.outputs.changes == 'no'
-        uses: ad-m/github-push-action@v0.5.0
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN}}
-          branch: ${{ github.ref }}
+        run: |
+          git remote set-url origin https://github.com/${{ github.repository }}.git
+          git checkout ${{ github.ref }}
+          git push origin ${{ github.head_ref }}
