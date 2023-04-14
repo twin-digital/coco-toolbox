@@ -1,56 +1,67 @@
-# Codecademy Data Analysis Capstone Projects
+Solution:
 
-This repository contains the capstone projects completed by me as a part of the Codecademy Data Analysis Path. Each project folder contains the project details, data files, and the Jupyter notebook where the analysis has been performed.
+1. Create a new file in the root directory of the project named "README.md".
+2. Open the file in your preferred text editor.
+3. Begin the file with a title denoted by a "# " at the start of a new line. For example: "# Coco-Toolbox".
+4. Write a brief overview of the project, including its purpose and functionality.
+5. Specify the technologies and dependencies used in the project.
+6. Provide instructions on how to install and set up the project.
+7. Explain the project structure and the purpose of each component and module.
+8. Include detailed explanations for any important API endpoints or functions.
+9. Provide examples of how to use the project in real-world situations.
+10. Add a contributor section with instructions on how to contribute to the project.
+11. Include a license section specifying the licensing terms for the project.
+12. Finally, add any additional documentation or resources that could be helpful for users or contributors to the project.
 
-## Project List
-
-1. [US Medical Insurance Costs](/us-medical-insurance-costs)
-2. [YouTube Trending Videos Data Analysis](/youtube-trending-videos-analysis)
-3. [OkCupid Data Analysis](/okcupid-data-analysis)
-
-## Repository Structure
-
-The repository is structured as follows:
-
+Example:
 ```
-codecademy-data-analysis-capstone/
-├── us-medical-insurance-costs/
-│   ├── data/
-│   │   └── insurance.csv
-│   ├── .gitignore
-│   ├── README.md
-│   └── us-medical-insurance-costs.ipynb
-├── youtube-trending-videos-analysis/
-│   ├── data/
-│   │   ├── CAvideos.csv
-│   │   ├── DEvideos.csv
-│   │   ├── FRvideos.csv
-│   │   ├── GBvideos.csv
-│   │   └── USvideos.csv
-│   ├── .gitignore
-│   ├── README.md
-│   └── youtube-trending-videos-analysis.ipynb
-├── okcupid-data-analysis/
-│   ├── data/
-│   │   └── profiles.csv
-│   ├── .gitignore
-│   ├── README.md
-│   └── okcupid-data-analysis.ipynb
-└── README.md
-```
+# Coco-Toolbox
 
-## Getting Started
+The Coco-Toolbox project is a collection of utilities used throughout the Twin Digital organization. This project is implemented in Typescript and is designed for high standards of maintainability, scalability, and security.
 
-To run the Jupyter notebooks in this repository, you must have Jupyter Notebook installed on your system. You can download and install Jupyter Notebook from [here](https://jupyter.org/install).
+## Technologies
 
-You can download the project files by running the following command in your terminal:
+The following technologies are used in this project:
+- Typescript
+- Node.js
+- NPM
 
-```shell
-git clone https://github.com/USERNAME/codecademy-data-analysis-capstone.git
-```
+## Installation
 
-Replace `USERNAME` with your GitHub username.
+To install and set up the project, follow these steps:
+1. Clone the repository from Github: `git clone https://github.com/yourusername/coco-toolbox.git`
+2. Install the project's dependencies: `npm install`
+3. Build the project: `npm run build`
+
+## Project Structure
+
+The Coco-Toolbox project is structured as follows:
+- `src/` contains the source code for the project.
+- `dist/` contains the compiled TypeScript code.
+- `tests/` contains the unit tests for the project.
+
+## API Endpoints
+
+The following API endpoints are available in this project:
+- `/utils/encode` - accepts a string and returns the Base64 encoded version of the string.
+- `/utils/decode` - accepts a Base64 encoded string and returns the decoded string.
+
+## Usage
+
+The Coco-Toolbox project can be used in a variety of real-world situations. For example, it can be used to encode and decode user data.
+
+To encode data, make a request to `/utils/encode` with a string as the body of the request. The endpoint will return the same string encoded in Base64.
+
+To decode data, make a request to `/utils/decode` with a Base64 encoded string as the body of the request. The endpoint will return the original decoded string.
+
+## Contributing
+
+To contribute to the Coco-Toolbox project, follow these steps:
+1. Fork the repository from Github.
+2. Make your changes and add tests if applicable.
+3. Submit a pull request with a clear description of your changes.
 
 ## License
 
-The content of this repository is licensed under a [Creative Commons Attribution License](https://creativecommons.org/licenses/by/3.0/us/).
+The Coco-Toolbox project is licensed under the MIT License. See the `LICENSE` file for more information.
+```
