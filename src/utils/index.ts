@@ -1,1 +1,1 @@
-export { removeLeadingSlash } from './remove-leading-slash'
+export { removeLeadingSlash } from './remove-leading-slash';
