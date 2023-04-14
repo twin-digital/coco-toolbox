@@ -1,31 +1,20 @@
 {
-  "name": "coco-toolbox",
+  "name": "@twin-digital/coco-toolbox",
   "version": "0.0.0",
-  "description": "Cutting-edge utility functions for Twin Digital's software projects",
-  "main": "index.ts",
-  "types": "index.d.ts",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/twindigital/coco-toolbox.git"
-  },
-  "keywords": [
-    "typescript",
-    "utilities"
-  ],
-  "author": "Twin Digital",
+  "main": "index.js",
+  "author": "Twin Digital <info@twin-digital.com>",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/twindigital/coco-toolbox/issues"
-  },
-  "homepage": "https://github.com/twindigital/coco-toolbox#readme",
   "dependencies": {
     "jest": "^27.0.6",
     "lodash": "^4.17.21"
   },
   "devDependencies": {
     "@types/jest": "^27.0.1",
-    "@types/lodash": "^4.14.171",
-    "@types/node": "^16.3.0",
+    "@types/lodash": "^4.14.170",
+    "@types/node": "^16.3.1",
     "typescript": "^4.3.5"
+  },
+  "scripts": {
+    "test": "jest"
   }
 }
