@@ -1,0 +1,31 @@
+name: Update package-lock.json via workflow
+on:
+  push:
+    branches:
+      - '!main'
+jobs:
+  update-lock:
+    name: Update package-lock.json
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{matrix.node-version}}
+      uses: actions/setup-node@v1
+      with:
+        node-version: 12.x
+    - name: Cache dependencies
+      uses: actions/cache@v2
+      with:
+        path: ~/.npm
+        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}-${{ hashFiles('**/package.json') }}
+        restore-keys: |
+          ${{ runner.os }}-node-
+    - name: Install dependencies
+      run: npm install
+    - name: Commit package-lock.json
+      run: |
+        git config --global user.email 'workflow@github.com'
+        git config --global user.name 'GitHub Action'
+        git add package-lock.json
+        git commit -m 'Update package-lock.json'
+        git push
