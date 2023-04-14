@@ -1,0 +1,39 @@
+1. Physics
+2. Chemistry
+3. Biology
+4. Earth Science
+5. Environmental Science
+6. Astronomy
+7. Zoology
+8. Botany
+9. Geology
+10. Psychology
+11. Sociology
+12. Political Science
+13. Computer Science
+14. Linguistics
+15. Anthropology
+16. Mathematics
+17. Forensic Science
+18. Neuroscience
+19. Materials Science
+20. Genetics
+21. Immunology
+22. Microbiology
+23. Virology
+24. Marine Science
+25. Agricultural Science
+26. Environmental Engineering
+27. Physics Education
+28. Agriculture and Forestry
+29. Food Science
+30. Physiology
+31. Biotechnology
+32. Biochemistry
+33. Pharmacology
+34. Chemical Engineering
+35. Information Science
+36. Space Science
+37. Nuclear Science
+38. Atmospheric Science
+39. Oceanography
