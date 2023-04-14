@@ -1,25 +1,36 @@
 {
-  "name": "coco-toolbox",
-  "version": "0.0.0",
-  "description": "Cutting-edge software problems",
+  "name": "note-taking-app",
+  "version": "1.0.0",
+  "description": "Web-based Note Taking App",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "build": "webpack",
+    "start": "webpack-dev-server --open"
   },
   "keywords": [
-    "typescript",
-    "utilities"
+    "note",
+    "app",
+    "web"
   ],
-  "author": "Coco[bot] <sean@twindigital.com>",
-  "license": "MIT",
-  "devDependencies": {
-    "@types/jest": "^27.0.1",
-    "@types/lodash": "^4.14.174",
-    "@types/node": "^16.0.0",
-    "jest": "^27.1.0",
-    "typescript": "^4.3.5"
-  },
+  "author": "Your Name",
+  "license": "ISC",
   "dependencies": {
-    "lodash": "^4.17.21"
+    "@babel/core": "^7.12.3",
+    "@babel/plugin-proposal-class-properties": "^7.12.1",
+    "@babel/preset-env": "^7.12.1",
+    "@babel/preset-react": "^7.12.5",
+    "@babel/preset-typescript": "^7.12.1",
+    "babel-loader": "^8.1.0",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-icons": "^4.1.0",
+    "react-router-dom": "^5.2.0",
+    "typescript": "^4.0.5",
+    "webpack": "^5.3.0",
+    "webpack-cli": "^4.1.0",
+    "webpack-dev-server": "^3.11.0"
+  },
+  "devDependencies": {
+    "@types/node": "^14.11.10"
   }
 }
