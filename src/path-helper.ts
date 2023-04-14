@@ -1,3 +1,2 @@
-export function removeLeadingSlash(path: string): string {
-  return path.replace(/^\//, '');
-}
+export * from './path-helper';
+export { removeLeadingSlash } from './remove-leading-slash';
