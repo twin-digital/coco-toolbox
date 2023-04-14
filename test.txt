@@ -1,0 +1,31 @@
+# Python Basics
+
+This repository contains materials and exercises for learning the basics of Python programming language. It is suitable for beginners and covers topics such as data types, operators, control structures, loops, functions, modules, and more.
+
+## Getting started
+
+To get started with the materials in this repository, you need to have Python installed on your computer. Check the [official Python website](https://www.python.org/downloads/) for installation instructions.
+
+Once you have Python installed, you can clone this repository to your local machine using the following command:
+
+```
+git clone https://github.com/username/python-basics.git
+```
+
+## Contents
+
+This repository contains the following folders and files:
+
+- `README.md`: This file you are currently reading.
+- `data/`: A folder containing datasets used in exercises and examples.
+- `exercises/`: A folder containing Python files with exercises for each topic covered in the course.
+- `examples/`: A folder containing Python files with illustrative examples for each topic covered in the course.
+- `modules/`: A folder containing Python files with module examples for each topic covered in the course.
+
+## Contributing
+
+We welcome contributions to this repository. If you find errors in the materials, have suggestions for improvements, or want to add new exercises or examples, feel free to open a pull request or create an issue.
+
+## License
+
+This repository is licensed under the MIT License. See the `LICENSE` file for more information.
