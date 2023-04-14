@@ -1,37 +1,28 @@
-name: Generate package-lock.json on push to branches except main
+name: Generate Package-Lock
+
 on:
   push:
     branches:
       - '!main'
     paths:
       - 'package.json'
+
 jobs:
-  generate-package-lock:
+  generate:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v2
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v2.5.1
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
         with:
-          node-version: '16.x'
-      - name: Cache npm dependencies
-        uses: actions/cache@v2
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}-npm-${{ hashFiles('**/npm-shrinkwrap.json') }}-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: ${{ runner.os }}-node-
-      - name: Install Dependencies
+          node-version: 16.x
+      - name: Install Package Dependencies
         run: npm install
-
-      - name: Commit changes
+      - name: Commit Package-Lock.json
         run: |
-          git config --global user.email 'coco@twin-digital.com'
-          git config --global user.name 'coco-b0t'
-          git add package-lock.json
-          git commit -m 'Generate package-lock.json'
-      - name: Push changes
-        run: |
-          git remote set-url origin https://github.com/${{ github.repository }}.git
-          git checkout ${{ github.ref }}
-          git push origin ${{ github.head_ref }}
+          git config user.email 'coco@twin-digital.com'
+          git config user.name 'coco-b0t'
+          if [[ -n $(git status --porcelain package-lock.json) ]]; then
+            git add package-lock.json
+            git commit -m 'Auto-commit: Generate package-lock.json'
+            git push
+          fi
