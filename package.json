@@ -1,0 +1,20 @@
+{
+  "name": "coco-toolbox",
+  "version": "1.0.0",
+  "description": "A collection of crucial utilities used throughout the organization",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "[INSERT YOUR NAME HERE]",
+  "license": "MIT",
+  "dependencies": {
+    "jest": "^27.2.3",
+    "lodash": "^4.17.21"
+  },
+  "devDependencies": {
+    "@types/jest": "^27.0.1",
+    "@types/lodash": "^4.14.168",
+    "@types/node": "^16.7.13"
+  }
+}
