@@ -1,14 +1,7 @@
-Filename: README.md
-```
-# Coco-Toolbox
-
-A collection of crucial utilities used throughout the organization.
-
-## Purpose
-The purpose of this project is to provide reusable utility services for various domains present in the organization.
-
-## Getting Started
-To start using this project, simply clone the repository and install the dependencies by running `npm install` in the root directory of the project.
-```
-
-Please note that this is just a basic template for a README file and it's recommended to fill in more specific details about the project, including how to use each utility and guidelines for contributing to the project.
+[
+  {
+    "path": "/README.md",
+    "action": "update",
+    "content": "## coco-toolbox\n\nThis repository contains utilities used throughout the Twin Digital organization, implemented in Typescript.\n\n### Installation\n\nTo install this project, clone the repository and run:\n\n```\nnpm install\n```\n\n### Usage\n\nThis project includes the following utilities:\n\n- Utility 1\n- Utility 2\n- Utility 3\n\nTo use a utility, import it from the respective module and call its functions.\n\n### Contribution Guidelines\n\nPlease follow these guidelines when making contributions to this project:\n\n1. Fork the repository and create a new branch for your changes\n2. Make changes and submit a pull request to the master branch\n3. Ensure all tests pass before submitting the pull request\n\n### License\n\nThis project is licensed under the MIT License."
+  }
+]
