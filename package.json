@@ -1,0 +1,25 @@
+{
+  "name": "coco-toolbox",
+  "version": "0.0.0",
+  "description": "Cutting-edge software problems",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [
+    "typescript",
+    "utilities"
+  ],
+  "author": "Coco[bot] <sean@twindigital.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/jest": "^27.0.1",
+    "@types/lodash": "^4.14.174",
+    "@types/node": "^16.0.0",
+    "jest": "^27.1.0",
+    "typescript": "^4.3.5"
+  },
+  "dependencies": {
+    "lodash": "^4.17.21"
+  }
+}
