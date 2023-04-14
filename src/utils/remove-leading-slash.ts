@@ -1,3 +1,3 @@
 export function removeLeadingSlash(path: string): string {
-	return path.replace(/^\//, '');
+  return path.startsWith('/') ? path.slice(1) : path;
 }
