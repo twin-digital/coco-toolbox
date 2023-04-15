@@ -1,31 +1,38 @@
-import * as cheerio from 'cheerio';
-import * as request from 'request-promise';
-
-type Bookshelf = {
-  title: string,
-  price: number,
-  url: string,
-  description: string
-}
+import request from 'request';
+import cheerio from 'cheerio';
 
 /**
- * Scrapes Amazon for bookshelves that are no taller than 5' in height
- * and returns an array of the five cheapest bookshelves along with their information
+ * Scrapes Amazon for bookshelves no taller than 5' in height and returns an array of the five cheapest results.
+ * @returns Promise of an array of bookshelf objects, each with the following properties:
+ *  - title: string
+ *  - price: number
+ *  - url: string
+ *  - description: string
  */
-export async function scrapeAmazon(): Promise<Bookshelf[]> {
+async function scrapeAmazon() {
   const url = 'https://www.amazon.com/s?k=bookshelves&rh=n%3A1069106&ref=nb_sb_noss_2';
-  const html = await request.get(url);
-  const $ = cheerio.load(html);
+  const response = await new Promise<string>((resolve, reject) => {
+    request(url, (err, res, body) => {
+      if (err) reject(err);
+      else resolve(body);
+    });
+  });
 
-  const bookshelves: Bookshelf[] = [];
+  const $ = cheerio.load(response);
 
-  $('h2.a-size-mini.a-spacing-none.a-color-base.s-line-clamp-2').slice(0, 5).each((i, el) => {
+  const bookshelves = [];
+
+  $('.a-section.a-text-center .a-size-mini.a-spacing-none.a-color-base.s-line-clamp-2').slice(0, 5).each((i, el) => {
     const title = $(el).text().trim();
-    const price = parseFloat($(el).closest('div').find('span.a-offscreen').eq(0).text().replace(/[^0-9.]/g, ''));
-    const url = 'https://www.amazon.com' + $(el).find('a.a-link-normal.a-text-normal').attr('href');
-    const description = $(el).closest('div').find('div.a-row.a-size-base.a-color-secondary.s-align-children-center').eq(0).text().trim();
+    const priceStr = $(el).closest('.sg-col.sg-col-4-of-12.sg-col-8-of-16.sg-col-12-of-20').next('.sg-col.sg-col-4-of-12.sg-col-8-of-16.sg-col-12-of-20').find('.a-offscreen').text().trim();
+    const price = parseFloat(priceStr.replace(',', ''));
+    const url = 'https://amazon.com' + $(el).closest('.s-result-item').find('.s-image-square-aspect img').parent().attr('href').trim();
+    const description = $(el).closest('.sg-col.sg-col-4-of-12.sg-col-8-of-16.sg-col-12-of-20').next('.sg-col.sg-col-4-of-12.sg-col-8-of-16.sg-col-12-of-20').find('.a-row.a-size-base.a-color-secondary.s-align-children-center').text().trim();
+
     bookshelves.push({ title, price, url, description });
   });
 
   return bookshelves;
 }
+
+export { scrapeAmazon };
