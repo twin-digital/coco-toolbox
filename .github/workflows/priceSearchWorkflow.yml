@@ -1,31 +1,26 @@
-name: Amazon Price Search Workflow
+name: Price Search Workflow
 
 on:
   schedule:
     - cron: '0 * * * *'
 
-jobs:
-  build:
+env:
+  FILENAME: 'bookshelfPrices.json'
 
+jobs:
+  scrape:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
-
-    - name: Set up Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: '14'
-
-    - name: Install dependencies
-      run: npm install
-
-    - name: Run scrapeAmazon function
-      run: npx ts-node coco-toolbox/amazonScraper.ts
-
-    - name: Save JSON file as artifact
-      uses: actions/upload-artifact@v2
-      with:
-        name: bookshelfPrices
-        path: bookshelfPrices.json
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14.x'
+      - run: npm install request cheerio
+      - run: npx ts-node coco-toolbox/amazonScraper.ts > $GITHUB_WORKSPACE/$FILENAME
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: ${{ env.FILENAME }}
+          path: ${{ env.FILENAME }}
