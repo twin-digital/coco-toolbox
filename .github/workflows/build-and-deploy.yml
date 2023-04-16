@@ -1,0 +1,79 @@
+name: Build and Deploy
+
+on:
+  push:
+    branches:
+      - main
+      - '!main'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 14.x
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Build
+        uses: actions/typescript-action@v1
+        with:
+          args: 'build --declaration false'
+
+  test:
+    needs: build
+    runs-on: ubuntu-latest
+    if: ${{ github.ref != 'refs/heads/main' }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 14.x
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Run Unit Tests
+        uses: bahmutov/npm-install-run@v1
+        with:
+          run: 'npm run test'
+
+  publish-to-npm:
+    needs: [build, test]
+    runs-on: ubuntu-latest
+    if: ${{ github.ref == 'refs/heads/main' }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 14.x
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Create New Version
+        run: |
+          npm version minor
+          echo "::set-output name=version::$(node -p "require('./package.json').version")"
+        id: version
+      - name: Publish to NPM
+        if: ${{ steps.version.outputs.version != null }}
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_AUTH_TOKEN}}
+        run: |
+          echo "Publishing package version ${{ steps.version.outputs.version }}"
+          npm publish
+          echo "Published package succesfully!"
+
