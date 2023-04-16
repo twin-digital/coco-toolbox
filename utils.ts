@@ -1,41 +1,38 @@
 import nodemailer from 'nodemailer';
 
 /**
- * This function sends an email every hour with a random number between 1 and 10, using the nodemailer package.
- */
-export function sendHourlyEmail(): void {
-    const SMTP_HOST = process.env.SMTP_HOST;
-    const SMTP_PORT = parseInt(process.env.SMTP_PORT as string);
-    const SMTP_SECURE = process.env.SMTP_SECURE === 'true';
-    const SMTP_USER = process.env.SMTP_USER;
-    const SMTP_PASS = process.env.SMTP_PASS;
-    const SMTP_FROM = process.env.SMTP_FROM;
-    const SMTP_TO = process.env.SMTP_TO;
-    
-    const transport = nodemailer.createTransport({
-        host: SMTP_HOST,
-        port: SMTP_PORT,
-        secure: SMTP_SECURE,
-        auth: {
-            user: SMTP_USER,
-            pass: SMTP_PASS
-        }
-    });
-    
-    const randomNum = Math.floor(Math.random() * 10) + 1;
-    
-    const mailOptions = {
-        from: SMTP_FROM,
-        to: SMTP_TO,
-        subject: 'Random Number Hourly Update',
-        text: `Your random number this hour is: ${randomNum}`
+  * Sends an hourly email with a random number to a user
+  * @param {string} smtpHost - Hostname or IP address of the SMTP server
+  * @param {number} smtpPort - Port number of the SMTP server
+  * @param {boolean} smtpSecure - Whether to use a secure connection to the SMTP server
+  * @param {string} smtpUser - Username to use for authentication with the SMTP server
+  * @param {string} smtpPass - Password to use for authentication with the SMTP server
+  * @param {string} fromEmail - Email address to use as the sender for the email
+  * @param {string} toEmail - Email address to send the email to
+  */
+export function sendHourlyEmail(smtpHost: string, smtpPort: number, smtpSecure: boolean, smtpUser: string, smtpPass: string, fromEmail: string, toEmail: string): void {
+  const transportOptions = {
+    host: smtpHost,
+    port: smtpPort,
+    secure: smtpSecure, // true for 465, false for other ports
+    auth: {
+      user: smtpUser,
+      pass: smtpPass
     }
-    
-    transport.sendMail(mailOptions, function(error, info){
-        if (error) {
-            console.log(error);
-        } else {
-            console.log('Email sent: ' + info.response);
-        }
-    });
+  };
+  const transporter = nodemailer.createTransport(transportOptions);
+
+  // Generate random number between 1 and 10
+  const randomNumber = Math.floor(Math.random() * 10) + 1;
+
+  // Set up the email parameters
+  const mailOptions = {
+    from: fromEmail,
+    to: toEmail,
+    subject: 'Hourly Random Number',
+    text: `Here is your hourly random number: ${randomNumber}`
+  };
+
+  // Send the email
+  transporter.sendMail(mailOptions);
 }
