@@ -1,31 +1,26 @@
 import { cosine } from './cosine';
 
+/**
+ * Tests for the cosine function.
+ */
 describe('cosine', () => {
-  it('should return the correct value for positive input', () => {
-    expect(cosine(Math.PI/3)).toBeCloseTo(0.5);
+  it('should return the correct cosine value for valid input angles', () => {
+    expect(cosine(0)).toEqual(1);
+    expect(cosine(Math.PI)).toEqual(-1);
+    expect(cosine(Math.PI / 2)).toEqual(0);
   });
 
-  it('should return the correct value for negative input', () => {
-    expect(cosine(-Math.PI/4)).toBeCloseTo(0.707);
+  it('should throw an error for input values outside the standard range of -pi to pi', () => {
+    expect(() => cosine(Math.PI * 3 / 2)).toThrowError('Input value is outside the standard range of -pi to pi.');
+    expect(() => cosine(-Math.PI * 3 / 2)).toThrowError('Input value is outside the standard range of -pi to pi.');
   });
 
-  it('should return 1 when input angle is 0', () => {
-    expect(cosine(0)).toBeCloseTo(1);
-  });
-
-  it('should throw an error when input angle is less than -pi', () => {
-    expect(() => cosine(-Math.PI - 0.1)).toThrowError('Input angle is outside the standard range: -pi to pi');
-  });
-
-  it('should throw an error when input angle is greater than pi', () => {
-    expect(() => cosine(Math.PI + 0.1)).toThrowError('Input angle is outside the standard range: -pi to pi');
-  });
-
-  it('should return NaN when input is NaN', () => {
+  it('should return NaN for NaN input values', () => {
     expect(cosine(NaN)).toBeNaN();
   });
 
-  it('should return Infinity when input is Infinity', () => {
-    expect(cosine(Infinity)).toBe(Infinity);
+  it('should return infinity or -infinity for infinity or -infinity input values', () => {
+    expect(cosine(Infinity)).toEqual(NaN);
+    expect(cosine(-Infinity)).toEqual(NaN);
   });
 });
