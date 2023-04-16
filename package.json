@@ -1,25 +1,47 @@
 {
-  "name": "coco-toolbox",
-  "version": "0.0.0",
-  "description": "Cutting-edge software problems",
-  "main": "index.js",
-  "scripts": {
-    "test": "jest"
+  "name": "@twin-digital/coco-toolbox",
+  "version": "1.0.0",
+  "description": "Coco Toolbox",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:twin-digital/coco-toolbox.git"
   },
   "keywords": [
-    "typescript",
-    "utilities"
+    "Coco",
+    "Toolbox"
   ],
-  "author": "Coco[bot] <sean@twindigital.com>",
+  "author": "Twin Digital",
   "license": "MIT",
-  "devDependencies": {
-    "@types/jest": "^27.0.1",
-    "@types/lodash": "^4.14.174",
-    "@types/node": "^16.0.0",
-    "jest": "^27.1.0",
-    "typescript": "^4.3.5"
+  "bugs": {
+    "url": "https://github.com/twin-digital/coco-toolbox/issues"
   },
+  "homepage": "https://github.com/twin-digital/coco-toolbox",
   "dependencies": {
-    "lodash": "^4.17.21"
+    "express": "~4.16.0",
+    "mongoose": "~5.11.18",
+    "cors": "^2.8.5"
+  },
+  "devDependencies": {
+    "@types/express": "~4.16.1",
+    "@types/mongoose": "~5.10.3",
+    "@types/jest": "^26.0.22",
+    "@typescript-eslint/eslint-plugin": "^4.22.0",
+    "@typescript-eslint/parser": "^4.22.0",
+    "eslint": "^7.21.0",
+    "eslint-config-airbnb-typescript": "^12.3.1",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jest": "^24.1.5",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-react": "^7.22.0",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "jest": "^27.0.4",
+    "ts-jest": "^27.0.3",
+    "typescript": "^4.2.4"
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "jest"
   }
 }
