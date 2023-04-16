@@ -4,7 +4,9 @@
   "description": "Cutting-edge software problems",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "send-hourly-email": "echo \"No action specified\"",
+    "build": "tsc"
   },
   "keywords": [
     "typescript",
