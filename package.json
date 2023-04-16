@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "send-hourly-email": "echo \"No action specified\"",
-    "build": "tsc"
+    "send-hourly-email": "echo \"Sending hourly email...\" && node dist/send-hourly-email.js"
   },
   "keywords": [
     "typescript",
